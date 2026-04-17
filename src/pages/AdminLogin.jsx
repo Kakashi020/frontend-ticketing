@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ShieldCheck, Lock, Mail, ArrowRight, Loader2 } from 'lucide-react';
+import { API_BASE_URL } from '../config';
 
 export default function AdminLogin() {
   const [email, setEmail] = useState('');
@@ -17,7 +18,7 @@ export default function AdminLogin() {
     setIsLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:8080/api/auth/admin/login', {
+      const response = await axios.post('${API_BASE_URL}/api/auth/admin/login', {
         email,
         password
       });
@@ -46,7 +47,7 @@ export default function AdminLogin() {
         }}
       ></div>
 
-      <div className="absolute inset-0 bg-gradient-to-b from-rose-950/30 via-[#05070A]/90 to-[#05070A]"></div>
+      <div className="absolute inset-0 bg-linear-to-b from-rose-950/30 via-[#05070A]/90 to-[#05070A]"></div>
 
       {/* Back to User Login */}
       <button 
@@ -65,7 +66,7 @@ export default function AdminLogin() {
            </div>
         </div>
 
-        <div className="text-center mb-10 text-left">
+        <div className="mb-10 text-center">
           <h1 className="text-3xl font-black text-white tracking-tighter uppercase mb-2">
             Admin <span className="text-rose-600">Portal</span>
           </h1>

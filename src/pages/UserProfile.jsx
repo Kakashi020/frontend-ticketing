@@ -6,7 +6,7 @@ import {
   Camera, Calendar, ShieldAlert, CheckCircle2, Fingerprint, 
   Loader2, X, Save 
 } from 'lucide-react';
-
+import { API_BASE_URL } from '../config';
 export default function UserProfile() {
   const navigate = useNavigate();
   const [userData, setUserData] = useState(null);
@@ -39,7 +39,7 @@ export default function UserProfile() {
     setIsUpdating(true);
     try {
       // Hits your new @PutMapping("/user/{id}") in AuthController
-      const response = await axios.put(`http://localhost:8080/api/auth/user/${userData.id}`, {
+      const response = await axios.put(`${API_BASE_URL}/api/auth/user/${userData.id}`, {
         ...userData,
         fullName: editName
       });

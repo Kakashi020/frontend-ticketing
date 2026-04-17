@@ -6,13 +6,13 @@ import {
   BrainCircuit, AlertTriangle, CheckCircle2, TrendingUp, 
   Zap, ShieldAlert, Layers
 } from 'lucide-react';
-
+import { API_BASE_URL } from '../config';
 export default function WekaReports() {
   const navigate = useNavigate();
   const [tickets, setTickets] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:8080/api/tickets')
+    axios.get(`${API_BASE_URL}/api/tickets`)
       .then(res => {
         setTickets(res.data);
       })

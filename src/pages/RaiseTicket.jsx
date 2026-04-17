@@ -6,7 +6,7 @@ import {
   LogOut, Send, Zap, Sparkles, MessageSquare, AlertCircle,
   Loader2, CheckCircle2, ArrowRight
 } from 'lucide-react';
-
+import { API_BASE_URL } from '../config';
 export default function RaiseTicket() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ subject: '', category: 'Hardware', description: '' });
@@ -37,7 +37,7 @@ export default function RaiseTicket() {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      await axios.post('http://localhost:8080/api/tickets', {
+      await axios.post(`${API_BASE_URL}/api/tickets`, {
         ...formData,
         fullName: userData?.fullName,
         email: userData?.email
@@ -56,7 +56,7 @@ export default function RaiseTicket() {
       
       {/* --- SUCCESS MODAL --- */}
       {showSuccess && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 backdrop-blur-xl bg-black/40 animate-in fade-in duration-300">
+        <div className="fixed inset-0 z-100 flex items-center justify-center p-6 backdrop-blur-xl bg-black/40 animate-in fade-in duration-300">
           <div className="bg-[#161B22] border border-white/10 w-full max-w-sm rounded-[3rem] p-10 text-center shadow-2xl animate-in zoom-in-95 duration-500">
             <div className="w-20 h-20 bg-emerald-500/10 rounded-full flex items-center justify-center mx-auto mb-6 border border-emerald-500/20">
               <CheckCircle2 className="text-emerald-500 animate-bounce" size={40} />

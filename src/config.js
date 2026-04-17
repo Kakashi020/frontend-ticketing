@@ -1,0 +1,1 @@
+export const API_BASE_URL = "https://smart-helpdesk-backend-had1.onrender.com";

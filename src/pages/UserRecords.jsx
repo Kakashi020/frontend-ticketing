@@ -6,7 +6,7 @@ import {
   LogOut, Mail, Phone, Trash2, X, Clock, CheckCircle2, 
   Loader2, Search, UserCheck, History 
 } from 'lucide-react';
-
+import { API_BASE_URL } from '../config';
 export default function UserRecords() {
   const navigate = useNavigate();
   const [customers, setCustomers] = useState([]);
@@ -19,7 +19,7 @@ export default function UserRecords() {
   useEffect(() => {
     const fetchCustomers = async () => {
       try {
-        const res = await axios.get('http://localhost:8080/api/auth/users');
+        const res = await axios.get(`${API_BASE_URL}/api/auth/users`);
         // Filter to only show Customers (excludes Admins)
         const customerList = res.data.filter(u => u.role === 'ROLE_CUSTOMER');
         setCustomers(customerList);
@@ -36,7 +36,7 @@ export default function UserRecords() {
   const handleUserClick = async (user) => {
     setSelectedUser(user);
     try {
-      const res = await axios.get('http://localhost:8080/api/tickets');
+      const res = await axios.get(`${API_BASE_URL}/api/tickets`);
       // Link tickets to this user by their email
       const filtered = res.data.filter(t => t.email === user.email);
       setUserTickets(filtered.sort((a, b) => b.id - a.id));

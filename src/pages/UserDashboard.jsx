@@ -6,7 +6,7 @@ import {
   Clock, AlertCircle, ShieldCheck, Timer, Calendar, 
   Mail, MapPin, Phone, RefreshCcw, RotateCcw, MessageSquare, X, Send
 } from 'lucide-react';
-
+import { API_BASE_URL } from '../config';
 export default function UserDashboard() {
   const navigate = useNavigate();
   const [tickets, setTickets] = useState([]);
@@ -39,7 +39,7 @@ export default function UserDashboard() {
     if (!userData) return;
     setIsSyncing(true);
     try {
-      const res = await axios.get('http://localhost:8080/api/tickets');
+      const res = await axios.get(`${API_BASE_URL}/api/tickets`);
       const myTickets = res.data
         .filter(t => t.email === userData.email)
         .sort((a, b) => b.id - a.id);
@@ -62,7 +62,7 @@ export default function UserDashboard() {
   // --- 3. HANDSHAKE ACTIONS ---
   const handleResolutionHandshake = async (ticketId, action, feedback = "") => {
     try {
-      await axios.patch(`http://localhost:8080/api/tickets/${ticketId}/${action}`, {
+      await axios.patch(`${API_BASE_URL}/api/tickets/${ticketId}/${action}`, {
         feedback: feedback
       });
       setIsFeedbackModalOpen(false);

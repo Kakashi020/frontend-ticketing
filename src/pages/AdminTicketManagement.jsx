@@ -6,7 +6,7 @@ import {
   LogOut, CheckCircle, AlertTriangle, Activity,
   Search, Filter, Loader2, MessageSquare, Cpu, ShieldAlert, X
 } from 'lucide-react';
-
+import { API_BASE_URL } from '../config';
 export default function AdminTicketManagement() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -20,7 +20,7 @@ export default function AdminTicketManagement() {
 
   const fetchTickets = async () => {
     try {
-      const res = await axios.get('http://localhost:8080/api/tickets');
+      const res = await axios.get('${API_BASE_URL}/api/tickets');
       setTickets(res.data.sort((a, b) => b.id - a.id));
     } catch (err) {
       console.error("Failed to fetch tickets:", err);
@@ -37,7 +37,7 @@ export default function AdminTicketManagement() {
 
   const handleProposeResolve = async (id) => {
     try {
-      await axios.patch(`http://localhost:8080/api/tickets/${id}/resolve`);
+      await axios.patch(`${API_BASE_URL}/api/tickets/${id}/resolve`);
       fetchTickets();
     } catch {
       alert("Handshake initiation failed.");

@@ -13,7 +13,7 @@ import {
   Search,
   AlertCircle
 } from 'lucide-react';
-
+import { API_BASE_URL } from '../config';
 export default function UserHistory() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -28,7 +28,7 @@ export default function UserHistory() {
   useEffect(() => {
     const fetchHistory = async () => {
       try {
-        const res = await axios.get('http://localhost:8080/api/tickets');
+        const res = await axios.get(`${API_BASE_URL}/api/tickets`);
         // Sort by ID descending to show the most recent tickets at the top
         const sorted = res.data.sort((a, b) => b.id - a.id);
         setAllTickets(sorted);
