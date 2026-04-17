@@ -20,7 +20,7 @@ export default function AdminTicketManagement() {
 
   const fetchTickets = async () => {
     try {
-      const res = await axios.get('${API_BASE_URL}/api/tickets');
+      const res = await axios.get(`${API_BASE_URL}/api/tickets`);
       setTickets(res.data.sort((a, b) => b.id - a.id));
     } catch (err) {
       console.error("Failed to fetch tickets:", err);
